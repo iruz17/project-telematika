@@ -21,10 +21,10 @@ app.get("/", (req, res) => {
 require("./app/routes/tutorial.routes")(app);
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-    console.log('Server berjalan pada port ${PORT}');
+    console.log(`Server berjalan pada port ${PORT}`);
 });
 
-const db = require("../app/models");
+const db = require("./app/models");
 db.mongoose
     .connect(db.url, {
         useNewUrlParser: true,
