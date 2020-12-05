@@ -18,7 +18,12 @@ app.get("/", (req, res) => {
     res.json({ message: "Assalamualaikum" });
 });
 
+require("./app/routes/card.routes")(app);
+require("./app/routes/gate.routes")(app);
+require("./app/routes/location.routes")(app);
 require("./app/routes/tutorial.routes")(app);
+require("./app/routes/visitation.routes")(app);
+require("./app/routes/visitor.routes")(app);
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
     console.log(`Server berjalan pada port ${PORT}`);

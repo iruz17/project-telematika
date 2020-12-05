@@ -4,10 +4,7 @@ module.exports = app => {
     var router = require("express").Router();
 
     router.post("/", tutorials.create);
-
     router.get("/", tutorials.findAll);
-
-    router.get("/published", tutorials.findAllPublished);
 
     router.get("/:id", tutorials.findOne);
 

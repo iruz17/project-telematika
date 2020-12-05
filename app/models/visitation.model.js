@@ -1,9 +1,9 @@
 module.exports = mongoose => {
     var schema = mongoose.Schema(
         {
-            VisitorID: String,
-            GateID: String,
-            Timestamp: String
+            visitorId: String,
+            gateId: String,
+            timestamp: String
         },
         { timestamps: true }
     );

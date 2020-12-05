@@ -1,11 +1,11 @@
 module.exports = mongoose => {
     var schema = mongoose.Schema(
         {
-            CardID: String,
-            Name: String,
-            Age: Number,
-            Gender: String,
-            City: String
+            cardId: String,
+            name: String,
+            age: Number,
+            gender: String,
+            city: String
         },
         { timestamps: true }
     );

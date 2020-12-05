@@ -1,8 +1,8 @@
 module.exports = mongoose => {
     var schema = mongoose.Schema(
         {
-            ID: String,
-            ValidityDate: String,
+            id: String,
+            validityDate: String,
         },
         { timestamps: true }
     );

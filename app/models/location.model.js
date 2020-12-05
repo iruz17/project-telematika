@@ -1,10 +1,10 @@
 module.exports = mongoose => {
     var schema = mongoose.Schema(
         {
-            Name: String,
-            Type: String,
-            Longitude: String,
-            Latitude: String
+            name: String,
+            type: String,
+            longitude: String,
+            latitude: String
         },
         { timestamps: true }
     );
