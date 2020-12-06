@@ -3,8 +3,8 @@ module.exports = mongoose => {
         {
             name: String,
             type: String,
-            longitude: String,
-            latitude: String
+            longitude: Number,
+            latitude: Number
         },
         { timestamps: true }
     );
@@ -15,6 +15,6 @@ module.exports = mongoose => {
         return object;
     });
 
-    const Location = mongoose.model("Location", schema);
+    const Location = mongoose.model("location", schema);
     return Location;
 };

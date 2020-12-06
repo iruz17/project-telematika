@@ -13,6 +13,6 @@ module.exports = mongoose => {
         return object;
     });
 
-    const Card = mongoose.model("Card", schema);
+    const Card = mongoose.model("card", schema);
     return Card;
 };

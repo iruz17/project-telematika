@@ -10,7 +10,7 @@ exports.create = (req, res) => {
     const tutorial = new Tutorial({
         title: req.body.title,
         description: req.body.description,
-        publushed: req.body.published ? req.body.published : false
+        published: req.body.published ? req.body.published : false
     });
 
     tutorial
@@ -60,7 +60,7 @@ exports.findOne = (req,res) => {
 
 exports.update = (req, res) => {
     if (!req.body) {
-        return res.status(400).send({ 
+        return res.status(400).send({
             message: "Data untuk diupdate tidak boleh kosong !"
         });
     }
@@ -107,4 +107,3 @@ exports.delete = (req, res) => {
 exports.deleteAll = (req, res) => {
 
 };
-
