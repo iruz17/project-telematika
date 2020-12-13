@@ -74,13 +74,13 @@ exports.update = (req, res) => {
     });
 };
 
-exports.delete = (req, res) => {
+exports.remove = (req, res) => {
   const cardId = req.params.cardId;
 
   Card.findByIdAndRemove(cardId)
     .then(card => {
       if (card) {
-        res.send({ message: 'card was removed successfully' });
+        res.send(card);
       } else {
         res.status(404).send({
           message: `cannot remove card with id ${cardId}`,

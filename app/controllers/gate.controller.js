@@ -72,13 +72,13 @@ exports.update = (req, res) => {
     });
 };
 
-exports.delete = (req, res) => {
+exports.remove = (req, res) => {
   const gateId = req.params.gateId;
 
   Gate.findByIdAndRemove(gateId)
     .then(gate => {
       if (gate) {
-        res.send({ message: 'gate was removed successfully' });
+        res.send(gate);
       } else {
         res.status(404).send({
           message: `cannot remove gate with id ${gateId}`,

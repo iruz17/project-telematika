@@ -8,7 +8,7 @@ module.exports = app => {
 
   router.get('/:cardId', controller.findOne);
   router.put('/:cardId', controller.update);
-  router.delete('/:cardId', controller.delete);
+  router.delete('/:cardId', controller.remove);
 
   app.use('/api/card', router);
 };

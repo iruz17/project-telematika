@@ -8,7 +8,7 @@ module.exports = app => {
 
   router.get('/:locationId', controller.findOne);
   router.put('/:locationId', controller.update);
-  router.delete('/:locationId', controller.delete);
+  router.delete('/:locationId', controller.remove);
 
   app.use('/api/location', router);
 };

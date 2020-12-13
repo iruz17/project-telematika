@@ -78,13 +78,13 @@ exports.update = (req, res) => {
     });
 };
 
-exports.delete = (req, res) => {
+exports.remove = (req, res) => {
   const locationId = req.params.locationId;
 
   Location.findByIdAndRemove(locationId)
     .then(location => {
       if (location) {
-        res.send({ message: 'location was removed successfully' });
+        res.send(location);
       } else {
         res.status(404).send({
           message: `cannot remove location with id ${locationId}`,

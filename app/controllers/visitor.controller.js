@@ -80,13 +80,13 @@ exports.update = (req, res) => {
     });
 };
 
-exports.delete = (req, res) => {
+exports.remove = (req, res) => {
   const visitorId = req.params.visitorId;
 
   Visitor.findByIdAndRemove(visitorId)
     .then(visitor => {
       if (visitor) {
-        res.send({ message: 'visitor was removed successfully' });
+        res.send(visitor);
       } else {
         res.status(404).send({
           message: `cannot remove visitor with id ${visitorId}`,
