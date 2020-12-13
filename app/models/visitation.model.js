@@ -1,19 +1,18 @@
 module.exports = mongoose => {
-    var schema = mongoose.Schema(
-        {
-            visitorId: String,
-            gateId: String,
-            timestamp: String
-        },
-        { timestamps: true }
-    );
+  var schema = mongoose.Schema(
+    {
+      visitorId: String,
+      gateId: String,
+      timestamp: String,
+    },
+    { timestamps: true }
+  );
 
-    schema.method("toJSON", function() {
-        const { __v, _id, ...object } = this.toObject();
-        object.id = _id;
-        return object;
-    });
+  schema.method('toJSON', function() {
+    const { _id, ...object } = this.toObject();
+    object.id = _id;
+    return object;
+  });
 
-    const Visitation = mongoose.model("visitation", schema);
-    return Visitation;
+  return mongoose.model('visitation', schema);
 };

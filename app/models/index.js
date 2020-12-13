@@ -1,16 +1,14 @@
-const dbConfig = require ("../config/db.config.js");
-
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-const db = {};
-db.mongoose = mongoose;
-db.url = dbConfig.url;
-db.tutorials = require("./tutorial.model.js")(mongoose);
-db.cards = require("./card.model.js")(mongoose);
-db.locations = require("./location.model.js")(mongoose);
-db.visitations = require("./visitation.model.js")(mongoose);
-db.visitors = require("./visitor.model.js")(mongoose);
-db.gates = require("./gate.model.js")(mongoose);
+const dbConfig = require('../config/db.config');
 
-module.exports = db;
+module.exports = {
+  mongoose: mongoose,
+  url: dbConfig.url,
+  Card: require('./card.model')(mongoose),
+  Gate: require('./gate.model')(mongoose),
+  Location: require('./location.model')(mongoose),
+  Visitation: require('./visitation.model')(mongoose),
+  Visitor: require('./visitor.model')(mongoose),
+};

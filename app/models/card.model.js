@@ -1,18 +1,17 @@
 module.exports = mongoose => {
-    var schema = mongoose.Schema(
-        {
-            id: String,
-            validityDate: String,
-        },
-        { timestamps: true }
-    );
+  var schema = mongoose.Schema(
+    {
+      tagId: String,
+      validityDate: String,
+    },
+    { timestamps: true }
+  );
 
-    schema.method("toJSON", function() {
-        const { __v, _id, ...object } = this.toObject();
-        object.id = _id;
-        return object;
-    });
+  schema.method('toJSON', function() {
+    const { _id, ...object } = this.toObject();
+    object.id = _id;
+    return object;
+  });
 
-    const Card = mongoose.model("card", schema);
-    return Card;
+  return mongoose.model('card', schema);
 };

@@ -1,114 +1,99 @@
-const db = require("../models");
-const Visitation = db.visitations;
+const Visitation = require('../models').Visitation;
 
 exports.create = (req, res) => {
-    // if (!req.body.title) {
-    //     res.status(400).send({ message: "Konten tidak boleh kosong !"});
-    //     return;
-    // }
+  if (!req.body) {
+    return res.status(400).send({ message: 'content could not be empty!' });
+  }
 
-    const visitation = new Visitation({
-        visitorId: req.body.visitorId,
-        gateId: req.body.gateId,
-        timestamp: req.body.timestamp,
+  const visitation = new Visitation({
+    visitorId: req.body.visitorId,
+    gateId: req.body.gateId,
+    timestamp: req.body.timestamp,
+  });
+
+  visitation.save(visitation)
+    .then(newVisitation => {
+      res.send(newVisitation);
+    })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
     });
-
-    visitation
-        .save(visitation)
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || "Beberapa error terjadi ketika membuat database"
-            });
-        });
 };
 
-exports.findAll = (req, res) => {
-    // const title = req.query.title;
-    // var condition = title ? { title: { $regex: new RegExp(title), $options: "i" }} : {};
-
-    Visitation.find()
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || "Beberapa error terjadi ketika mendapatkan database"
-            })
-        })
+exports.findAll = (_, res) => {
+  Visitation.find()
+    .then(visitations => {
+      res.send(visitations);
+    })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
 };
 
-exports.findOne = (req,res) => {
-    const id = req.params.id;
+exports.findOne = (req, res) => {
+  const visitationId = req.params.visitationId;
 
-    Visitation.findById(id)
-        .then(data => {
-            if (!data)
-                res.status(404).send({ message: "Tidak ditemukan database dengan id" + id });
-            else res.send(data);
-        })
-        .catch(err => {
-            res
-                .status(500)
-                .send({ message: "Error mendapatkan database dengan id=" + id});
+  Visitation.findById(visitationId)
+    .then(visitation => {
+      if (visitation) {
+        res.send(visitation);
+      } else {
+        res.status(404).send({
+          message: `visitation with id ${visitationId} not found`,
         });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
 };
 
 exports.update = (req, res) => {
-    if (!req.body) {
-        return res.status(400).send({ 
-            message: "Data untuk diupdate tidak boleh kosong !"
-        });
-    }
+  const visitationId = req.params.visitationId;
 
-    const id = req.params.id;
+  if (!req.body) {
+    return res.status(400).send({ message: 'content could not be empty!' });
+  }
 
-    Visitation.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
-        .then(data => {
-            if (!data) {
-                res.status(404).send({
-                    message: 'tidak bisa mengupdate database dengan id=${id}. mungkin database tidak ditemukan!'
-                });
-            } else res.send ({ message: "database sukses terupdate"});
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "error ketika mengupdate database dengan id=" + id
-            });
+  const visitation = {
+    visitorId: req.body.visitorId,
+    gateId: req.body.gateId,
+    timestamp: req.body.timestamp,
+  };
+
+  Visitation.findByIdAndUpdate(
+    visitationId,
+    visitation,
+    { useFindAndModify: false }
+  )
+    .then(newVisitation => {
+      if (newVisitation) {
+        res.send(newVisitation);
+      } else {
+        res.status(404).send({
+          message: `cannot update visitation with id ${visitationId}`,
         });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
 };
 
 exports.delete = (req, res) => {
-    const id = req.params.id;
+  const visitationId = req.params.visitationId;
 
-    Visitation.findByIdAndRemove(id)
-        .then(data => {
-            if(!data) {
-                res.status(404).send({
-                    message: 'tidak bisa menghapus database dengan id=${id}. mungkin database tidak ditemukan!'
-                });
-            } else {
-                res.send({
-                    message: "database sukses dihapus!"
-                });
-            }
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "tidak bisa menghapus database dengan id=" + id
-            });
+  Visitation.findByIdAndRemove(visitationId)
+    .then(visitation => {
+      if (visitation) {
+        res.send({ message: 'visitation was removed successfully' });
+      } else {
+        res.status(404).send({
+          message: `cannot remove visitation with id ${visitationId}`,
         });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
 };
-
-exports.deleteAll = (req, res) => {
-
-};
-
-exports.findAllPublished = (req, res) => {
-
-};
-
