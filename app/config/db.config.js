@@ -1,3 +1,3 @@
 module.exports = {
-    url: "mongodb://localhost:27017/smarttourism_db"
-}
+  url: 'mongodb://localhost:27017/smart_tourism_db',
+};
