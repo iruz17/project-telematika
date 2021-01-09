@@ -6,6 +6,7 @@ exports.create = (req, res) => {
   }
 
   const gate = new Gate({
+    name: req.body.name,
     locationId: req.body.locationId,
     type: req.body.type,
   });
@@ -55,6 +56,7 @@ exports.update = (req, res) => {
   }
 
   const gate = {
+    name: req.body.name,
     locationId: req.body.locationId,
     type: req.body.type,
   };
