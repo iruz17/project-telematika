@@ -22,9 +22,9 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
   let condition = {};
   if (req.query.tagId) {
-      condition = {
-        tagId: { $regex: new RegExp(req.query.tagId) },
-      };
+    condition = {
+      tagId: { $regex: new RegExp(req.query.tagId) },
+    };
   }
 
   Card.find(condition)

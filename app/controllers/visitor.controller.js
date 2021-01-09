@@ -10,7 +10,6 @@ exports.create = (req, res) => {
     name: req.body.name,
     age: req.body.age,
     gender: req.body.gender,
-    city: req.body.city,
   });
 
   visitor.save(visitor)
@@ -62,7 +61,6 @@ exports.update = (req, res) => {
     name: req.body.name,
     age: req.body.age,
     gender: req.body.gender,
-    city: req.body.city,
   };
 
   Visitor.findByIdAndUpdate(visitorId, visitor, { useFindAndModify: false })

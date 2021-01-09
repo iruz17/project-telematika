@@ -2,6 +2,7 @@ module.exports = mongoose => {
   var schema = mongoose.Schema(
     {
       locationId: String,
+      type: String,
     },
     { timestamps: true }
   );
