@@ -1,4 +1,4 @@
-const Gate = require('../models').gates;
+const Gate = require('../models').Gate;
 
 exports.create = (req, res) => {
   if (!req.body) {
@@ -6,7 +6,9 @@ exports.create = (req, res) => {
   }
 
   const gate = new Gate({
-    locationID: req.body.locationID,
+    name: req.body.name,
+    locationId: req.body.locationId,
+    type: req.body.type,
   });
 
   gate.save(gate)
@@ -54,7 +56,9 @@ exports.update = (req, res) => {
   }
 
   const gate = {
-    locationID: req.body.locationID,
+    name: req.body.name,
+    locationId: req.body.locationId,
+    type: req.body.type,
   };
 
   Gate.findByIdAndUpdate(gateId, gate, { useFindAndModify: false })

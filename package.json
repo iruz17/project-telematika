@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node bin/start.js",
+    "fill": "node bin/fill.js",
     "lint": "eslint --ignore-path .gitignore ."
   },
   "dependencies": {

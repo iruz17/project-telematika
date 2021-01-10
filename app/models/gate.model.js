@@ -1,7 +1,9 @@
 module.exports = mongoose => {
   var schema = mongoose.Schema(
     {
+      name: String,
       locationId: String,
+      type: String,
     },
     { timestamps: true }
   );
