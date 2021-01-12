@@ -64,9 +64,21 @@ exports.update = (req, res) => {
   };
 
   Visitor.findByIdAndUpdate(visitorId, visitor, { useFindAndModify: false })
-    .then(newVisitor => {
-      if (newVisitor) {
-        res.send(newVisitor);
+    .then(result => {
+      if (result) {
+        Visitor.findById(visitorId)
+          .then(newVisitor => {
+            if (newVisitor) {
+              res.send(newVisitor);
+            } else {
+              res.status(404).send({
+                message: `visitor with id ${visitorId} not found`,
+              });
+            }
+          })
+          .catch(err => {
+            res.status(500).send({ message: err.message });
+          });
       } else {
         res.status(404).send({
           message: `cannot update visitor with id ${visitorId}`,
