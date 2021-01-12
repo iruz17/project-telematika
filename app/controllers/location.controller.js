@@ -64,9 +64,21 @@ exports.update = (req, res) => {
   };
 
   Location.findByIdAndUpdate(locationId, location, { useFindAndModify: false })
-    .then(newLocation => {
-      if (newLocation) {
-        res.send(newLocation);
+    .then(result => {
+      if (result) {
+        Location.findById(locationId)
+          .then(newLocation => {
+            if (newLocation) {
+              res.send(newLocation);
+            } else {
+              res.status(404).send({
+                message: `location with id ${locationId} not found`,
+              });
+            }
+          })
+          .catch(err => {
+            res.status(500).send({ message: err.message });
+          });
       } else {
         res.status(404).send({
           message: `cannot update location with id ${locationId}`,

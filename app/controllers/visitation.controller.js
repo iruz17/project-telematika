@@ -66,9 +66,21 @@ exports.update = (req, res) => {
     visitation,
     { useFindAndModify: false }
   )
-    .then(newVisitation => {
-      if (newVisitation) {
-        res.send(newVisitation);
+    .then(result => {
+      if (result) {
+        Visitation.findById(visitationId)
+          .then(newVisitation => {
+            if (newVisitation) {
+              res.send(newVisitation);
+            } else {
+              res.status(404).send({
+                message: `visitation with id ${visitationId} not found`,
+              });
+            }
+          })
+          .catch(err => {
+            res.status(500).send({ message: err.message });
+          });
       } else {
         res.status(404).send({
           message: `cannot update visitation with id ${visitationId}`,

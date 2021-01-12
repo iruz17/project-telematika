@@ -62,9 +62,21 @@ exports.update = (req, res) => {
   };
 
   Gate.findByIdAndUpdate(gateId, gate, { useFindAndModify: false })
-    .then(newGate => {
-      if (newGate) {
-        res.send(newGate);
+    .then(result => {
+      if (result) {
+        Gate.findById(gateId)
+          .then(newGate => {
+            if (newGate) {
+              res.send(newGate);
+            } else {
+              res.status(404).send({
+                message: `gate with id ${gateId} not found`,
+              });
+            }
+          })
+          .catch(err => {
+            res.status(500).send({ message: err.message });
+          });
       } else {
         res.status(404).send({
           message: `cannot update gate with id ${gateId}`,

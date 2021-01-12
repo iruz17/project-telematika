@@ -67,9 +67,21 @@ exports.update = (req, res) => {
   };
 
   Card.findByIdAndUpdate(cardId, card, { useFindAndModify: false })
-    .then(newCard => {
-      if (newCard) {
-        res.send(newCard);
+    .then((result) => {
+      if (result) {
+        Card.findById(cardId)
+          .then(newCard => {
+            if (newCard) {
+              res.send(newCard);
+            } else {
+              res.status(404).send({
+                message: `card with id ${cardId} not found`,
+              });
+            }
+          })
+          .catch(err => {
+            res.status(500).send({ message: err.message });
+          });
       } else {
         res.status(404).send({
           message: `cannot update card with id ${cardId}`,
