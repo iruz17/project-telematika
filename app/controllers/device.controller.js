@@ -32,24 +32,24 @@ exports.visitation = (req, res) => {
                           );
                         });
                     } else {
-                      res.status(500).send('Kartu tidak valid');
+                      res.status(404).send('Kartu tidak valid');
                     }
                   })
                   .catch(err => {
                     res.status(500).send(`Kesalahan server, ${err.message}`);
                   });
               } else {
-                res.status(500).send('Kartu tidak valid');
+                res.status(401).send('Kartu sudah tidak berlaku');
               }
             } else {
-              res.status(500).send('Kartu tidak valid');
+              res.status(404).send('Kartu tidak valid');
             }
           })
           .catch(err => {
             res.status(500).send(`Kesalahan server, ${err.message}`);
           });
       } else {
-        res.status(500).send('Gate tidak valid');
+        res.status(404).send('Gate tidak valid');
       }
     })
     .catch(err => {
