@@ -5,6 +5,7 @@ module.exports = mongoose => {
       type: String,
       longitude: Number,
       latitude: Number,
+      description: String,
     },
     { timestamps: true }
   );

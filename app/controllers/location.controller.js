@@ -10,6 +10,7 @@ exports.create = (req, res) => {
     type: req.body.type,
     longitude: req.body.longitude,
     latitude: req.body.latitude,
+    description: req.body.description,
   });
 
   location.save(location)
@@ -61,6 +62,7 @@ exports.update = (req, res) => {
     type: req.body.type,
     longitude: req.body.longitude,
     latitude: req.body.latitude,
+    description: req.body.description,
   };
 
   Location.findByIdAndUpdate(locationId, location, { useFindAndModify: false })
