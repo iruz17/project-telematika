@@ -13,7 +13,7 @@ exports.visitation = (req, res) => {
                   .then(visitor => {
                     if (visitor) {
                       const visitation = new models.Visitation({
-                        visitorId: visitor.id,
+                        visitorId: visitor._id,
                         gateId: req.params.gateId,
                         timestamp: util.toDateTimeInput(new Date()),
                       });
